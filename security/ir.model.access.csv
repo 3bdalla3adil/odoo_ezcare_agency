@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_m_core_agency_type,m.core.agency.type,model_m_core_agency_type,base.group_user,1,1,1,1
+access_m_core_region,m.core.region,model_m_core_region,base.group_user,1,1,1,1
+access_m_core_agency_taxonomy,m.core.agency.taxonomy,model_m_core_agency_taxonomy,base.group_user,1,1,1,1

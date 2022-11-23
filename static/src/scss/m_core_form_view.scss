@@ -1,0 +1,8 @@
+.o_legacy_form_view.o_group.o_inner_group.o_myezcare_group{
+      tbody > tr > td {
+        &.o_td_label {
+            @include o-td-label-style;
+            text-align:right;
+        }
+    }
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+  <!-- Filter Option  -->
+     <record id="view_m_core_agency_filter" model="ir.ui.view">
+            <field name="name">m.core.agency.search.view</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Agency">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+               </search>
+            </field>
+        </record>
+<!-- Form view -->
+     <record model="ir.ui.view" id="m_core_agency_form_view">
+      <field name="name">m.core.agency.form.view</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group class="o_myezcare_group">
+                  <field name="type_id"/>
+                  <field name="npi" placeholder="Agency NPI"/>
+                  <field name="region_id" placeholder="Select Region"/>
+                  <field name="country_id" invisible="1"/>
+                  <field name="state_id" placeholder="Select"/>
+                  <field name="fax" placeholder="(XXX) XXX-XXXX"/>
+                  <field name="phone" placeholder="(XXX) XXX-XXXX"/>
+                  <field name="mobile" placeholder="(XXX) XXX-XXXX"/>
+              </group>
+              <group class="o_myezcare_group">
+                  <field name="name" string="Agency Name" placeholder="Agency Name" required="True" class="o_agency_required_label"/>
+                  <field name="vat" string="TIN" placeholder="TIN"/>
+                  <field name="ein" placeholder="EIN"/>
+                  <field name="street" placeholder="Address"/>
+                  <field name="city" placeholder="City"/>
+                  <field name="zip" placeholder="XXXXX - XXXX"/>
+                  <field name="partner_type" invisible="True" force_save="True"/>
+               </group>
+            </group>
+            <group class="o_myezcare_group">
+                <field name="taxonomy_ids">
+                    <tree>
+                        <field name="primary_taxonomy"/>
+                        <field name="selected_taxonomy"/>
+                        <field name="state"/>
+                        <field name="license_number"/>
+                    </tree>
+                </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+<!-- tree view -->
+    <record model="ir.ui.view" id="m_core_agency_tree_view">
+      <field name="name">m.core.agency.tree.view</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="type_id"/>
+          <field name="name" string="Agency Name"/>
+          <field name="region_id"/>
+          <field name="vat" string="TIN"/>
+          <field name="ein"/>
+          <field name="mobile"/>
+          <field name="phone"/>
+          <field name="street"/>
+        </tree>
+      </field>
+    </record>
+<!-- Action window -->
+    <record model="ir.actions.act_window" id="m_core_agency_window">
+      <field name="name">Agency</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_ids" eval="[(5, 0, 0),
+    (0, 0, {'view_mode': 'tree', 'view_id': ref('m_core_agency_tree_view')}),
+    (0, 0, {'view_mode': 'form', 'view_id': ref('m_core_agency_form_view')})]"/>
+      <field name="domain">[('partner_type','=', 'agency')]</field>
+      <field name="context">{'default_partner_type': 'agency'}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Create a agency
+        </p>
+      </field>
+    </record> 
+  <!-- Menu item Added -->
+
+  <!-- Rooot Menu -->
+    <menuitem
+          id="m_core_agency_menu"
+          name="EzCare Agency"
+          sequence="20"/>
+
+  <!-- Sub Menu -->
+    <menuitem
+          id="m_core_agency_sub_menu"
+          name="EzCare Agency"
+          action="m_core_agency_window"
+          parent="m_core_agency_menu"
+          sequence="10"/>
+
+  </data>
+</odoo>
